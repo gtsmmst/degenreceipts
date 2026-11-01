@@ -1,0 +1,33 @@
+---
+interface Row { k: string; v: string }
+interface Link { label: string; href: string }
+interface Props {
+  title?: string;
+  subtitle: string;
+  rows: Row[];
+  totalLabel: string;
+  totalValue: string;
+  stamp: string;
+  stampTone?: 'pos' | 'neg' | 'blue';
+  links?: Link[];
+  tilt?: number;
+}
+const { title = 'DEGENRECEIPTS', subtitle, rows, totalLabel, totalValue, stamp, stampTone = 'blue', links = [], tilt = 1.5 } = Astro.props;
+---
+<div class="receipt-wrap" style={`transform: rotate(${tilt}deg)`}>
+  <div class="receipt">
+    <div class="r-title">{title}</div>
+    <div class="r-sub">{subtitle}</div>
+    <div class="r-line"></div>
+    {rows.map((r) => <div class="r-row"><span>{r.k}</span><span>{r.v}</span></div>)}
+    <div class="r-line"></div>
+    <div class="r-total"><span>{totalLabel}</span><span>{totalValue}</span></div>
+    <div class={`r-stamp ${stampTone}`}><span>{stamp}</span></div>
+    {links.length > 0 && (
+      <div class="r-links">
+        {links.map((l) => <a href={l.href} rel="noopener" target="_blank">{l.label} ↗</a>)}
+      </div>
+    )}
+  </div>
+  <svg class="receipt-edge" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0 H100 V2 L97.5 10 L95 2 L92.5 10 L90 2 L87.5 10 L85 2 L82.5 10 L80 2 L77.5 10 L75 2 L72.5 10 L70 2 L67.5 10 L65 2 L62.5 10 L60 2 L57.5 10 L55 2 L52.5 10 L50 2 L47.5 10 L45 2 L42.5 10 L40 2 L37.5 10 L35 2 L32.5 10 L30 2 L27.5 10 L25 2 L22.5 10 L20 2 L17.5 10 L15 2 L12.5 10 L10 2 L7.5 10 L5 2 L2.5 10 L0 2 Z" fill="#F7F7F4"></path></svg>
+</div>

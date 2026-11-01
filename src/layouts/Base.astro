@@ -1,0 +1,84 @@
+---
+import '../styles/global.css';
+import site from '../data/site.json';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  noindex?: boolean;
+}
+const { title, description = site.description, ogImage, noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://degenreceipts.com').href;
+const fullTitle = title === site.name ? `${site.name} — ${site.tagline}` : `${title} · ${site.name}`;
+const og = ogImage ? new URL(ogImage, Astro.site).href : new URL('/brand/banner.png', Astro.site).href;
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex" />}
+<link rel="icon" href="/brand/favicon.png" type="image/png" />
+<link rel="apple-touch-icon" href="/brand/avatar.png" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={og} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content={site.x_handle} />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={og} />
+<meta name="theme-color" content="#0B0F14" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" />
+<slot name="head" />
+</head>
+<body>
+<div class="strip">18+ · Gambling can become addictive · Play only what you can afford to lose</div>
+<div class="wrap">
+  <header class="site-header">
+    <a href="/" class="brand" aria-label={`${site.name} home`}><span class="caret">&gt;</span><span>degen</span><span class="slash">/</span><span>receipts</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="/#ranking">Ranking</a>
+      <a href="/#log">Withdrawal log</a>
+      <a href="/#how">How I review</a>
+      <a href="/#leaderboard">Leaderboard</a>
+    </nav>
+    <div class="actions">
+      <a class="btn" href={site.telegram} rel="me noopener" target="_blank">Contact me on X / TG</a>
+      <a class="btn btn-primary" href={site.x_url} rel="me noopener" target="_blank">Follow on X</a>
+    </div>
+  </header>
+
+  <slot />
+
+  <footer class="site-footer">
+    <div>
+      <div class="brand" style="min-height:auto;font-size:17px"><span class="caret">&gt;</span><span>degen</span><span class="slash">/</span><span>receipts</span></div>
+      <p style="margin-top:8px">A gambler's diary by Panda. Real money, real receipts.</p>
+    </div>
+    <nav aria-label="Footer">
+      <a href="/#ranking">Ranking</a>
+      <a href="/#log">Withdrawal log</a>
+      <a href="/#leaderboard">Leaderboard</a>
+      <a href="/#how">How I review</a>
+      <a href={site.x_url} rel="me noopener" target="_blank">X</a>
+      <a href={site.telegram} rel="me noopener" target="_blank">Telegram</a>
+    </nav>
+    <div class="legal">
+      <p style="margin-bottom:8px">Some links are my referral links. They support the site at no extra cost to you. Rankings aren't for sale.</p>
+      <p>18+ · Gambling can become addictive. Don't play with more than you can afford to lose — gamble responsibly. Need help? <a href="https://www.gamblingtherapy.org" rel="noopener" target="_blank">gamblingtherapy.org</a></p>
+      <p style="margin-top:14px">© 2026 {site.name}</p>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

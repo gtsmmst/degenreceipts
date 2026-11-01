@@ -1,0 +1,312 @@
+{
+ "_note": "Single source for the site. Proof tx verified on Etherscan 2026-11-01 via Panda's Chrome: deposits are sent from panda.eth, withdrawals land on panda.eth, all Success. Amounts in tokens; USD per Etherscan at tx time. rank/tier/summary added 2026-11-02 (rank order is Claude's proposal, Panda to confirm).",
+ "casinos": [
+  {
+   "slug": "stake",
+   "name": "Stake",
+   "ref": "https://stake.com/?c=degenreceipts",
+   "ref_code": "degenreceipts",
+   "verdict": "great",
+   "rank": 1,
+   "status": "page-v2",
+   "wagered_usd": 11374433,
+   "vip": "Diamond I",
+   "proof_deposit": {
+    "hash": "0x91819a34a0f2ffe7841d3657952240f0c0c7b4e577b8caed5393d881fa9b4b64",
+    "amount": "81,737.16 USDC",
+    "date": "2026-06-25",
+    "source": "Stake export"
+   },
+   "proof_withdrawal": {
+    "hash": "0x302ac67be23fc3b71ef4fc723d6c2d6576a5e94898c336e2fd266de1082cc4b2",
+    "amount": "125,000 USDC",
+    "date": "2026-09-19",
+    "source": "Stake export"
+   },
+   "tier": "great",
+   "tier_label": "Great",
+   "summary": "Six-figure withdrawals in 1–2 minutes, a VIP host who solves things, 25% lossback. $1.99M in, $2.24M out. No problems so far.",
+   "wagered_label": "$11.37M wagered",
+   "joined": "2023-07",
+   "deposits_usd": 1988583,
+   "withdrawals_usd": 2235611,
+   "net_usd": 247028,
+   "deposits_n": 63,
+   "withdrawals_n": 51
+  },
+  {
+   "slug": "yeet",
+   "name": "Yeet",
+   "ref": "https://yeet.com/register?aff=degenreceipts",
+   "ref_code": "degenreceipts",
+   "verdict": "good",
+   "rank": 2,
+   "status": "page-v1",
+   "wagered_usd": 1259257,
+   "vip": "Jade I",
+   "proof_deposit": {
+    "hash": "0x2a5a3f5264f1c9f702fca266a2051ccc22e04f951bdc0520cf1289c1d1af9ee6",
+    "amount": "20,591.55 USDC",
+    "date": "2026-09-05 17:43 UTC",
+    "usd": "20,587.70"
+   },
+   "proof_withdrawal": {
+    "hash": "0x9fc01dc38539c2dd4f8cdb4f5d48dbc7369bbfde817ddb2cab6d5004fb2cc3c0",
+    "amount": "58,711.96 USDC",
+    "date": "2026-09-19 22:03 UTC",
+    "usd": "58,700.98"
+   },
+   "tier": "good",
+   "tier_label": "Good",
+   "summary": "Cozy room, founder a message away, odds better than Stake. Esports limits cut to ~$65 a bet after a short winning run.",
+   "wagered_label": "$1.26M wagered"
+  },
+  {
+   "slug": "shuffle",
+   "name": "Shuffle",
+   "ref": "https://shuffle.com?r=degenreceipts",
+   "ref_code": "degenreceipts",
+   "verdict": "good — pays, sports not cut; KYC level 4 mid-withdrawal",
+   "rank": 3,
+   "status": "page-v1",
+   "wagered_usd": 401893,
+   "vip": "Platinum 3",
+   "joined": "2023-11-02",
+   "deposits_usd": 102481.33,
+   "withdrawals_usd": 124070.95,
+   "net_usd": 21589.62,
+   "proof_deposit": {
+    "hash": "0x29e2afd7041950bc63c61e3d88abb4d6e5f7946a667df87eb93bbdcc93efb412",
+    "amount": "14,877 USDC",
+    "date": "2026-07-03 13:37 UTC",
+    "usd": "14,874.22"
+   },
+   "proof_withdrawal": {
+    "hash": "0x72e644b3f8ff2f602de185994d58e104feec0ba0665217b68d7a2b8526e97288",
+    "amount": "60,000 USDC",
+    "date": "2026-07-04 01:00 UTC",
+    "usd": "59,988.78"
+   },
+   "tier": "good",
+   "tier_label": "Good",
+   "summary": "Pays, sports not cut, +$21.6K for me. KYC level 4 demanded mid-withdrawal — finish all levels before you need the money.",
+   "wagered_label": "$402K wagered"
+  },
+  {
+   "slug": "thrill",
+   "name": "Thrill",
+   "ref": "https://thrill.com/?r=degenreceipts",
+   "ref_code": "degenreceipts",
+   "verdict": "good — great site, sports limits cut",
+   "rank": 4,
+   "status": "page-v1",
+   "wagered_usd": 846046,
+   "vip": "Emerald III",
+   "joined": "2026-06",
+   "deposits_usd": 92622.2,
+   "withdrawals_usd": 92740.67,
+   "net_usd": 118.47,
+   "proof_deposit": {
+    "hash": "0xc53a13d8d3b65d488dcc324647e3350de07e42dc55a0c6cc3f680183f6ab135d",
+    "amount": "30,001 USDC",
+    "date": "2026-07-08 09:31 UTC",
+    "usd": "29,995.39"
+   },
+   "proof_withdrawal": {
+    "hash": "0x09484304aad7330640365f875a2824de00d9b955bc59bac5a61d07ee91fc0130",
+    "amount": "31,499 USDC",
+    "date": "2026-07-18 11:08 UTC",
+    "usd": "31,493.11"
+   },
+   "tier": "good",
+   "tier_label": "Good",
+   "summary": "Best-built site (along with Yeet), fast USDC both ways, break-even for me. Sports limits cut after a few weeks. My first max win: $2 → $25,000.",
+   "wagered_label": "$846K wagered"
+  },
+  {
+   "slug": "bcgame",
+   "name": "BC.Game",
+   "ref": "https://bc.game/i-987we2m4f7-n/",
+   "ref_code": null,
+   "verdict": "good so far — limited",
+   "rank": 5,
+   "status": "page-v1",
+   "wagered_usd": 6579,
+   "vip": "Silver II",
+   "joined": "2026-07",
+   "deposits_usd": 10003.53,
+   "note": "limited experience; proper test planned; no tx proof yet (July 2026 USDT/USDC deposits could be found on-chain)",
+   "tier": "good",
+   "tier_label": "Good so far",
+   "summary": "Limited experience: VIP transfer, easy KYC, fast money, sports untouched. Proper test coming.",
+   "wagered_label": "$6.6K wagered"
+  },
+  {
+   "slug": "metawin",
+   "name": "MetaWin",
+   "ref": "https://metawin.com/schmuck",
+   "ref_code": "schmuck",
+   "ref_note": "code = Panda's MetaWin username; decide",
+   "verdict": "neutral",
+   "rank": 6,
+   "status": "page-v1",
+   "wagered_usd": null,
+   "vip": "Gold",
+   "proof_deposit": {
+    "hash": "0xc70c556dcd9b417c8a087d3a83268ccb81127ad0218c9338558aaf5d6c3578ca",
+    "amount": "5,562 USDT",
+    "date": "2026-03-31 17:11 UTC",
+    "usd": "5,558.06"
+   },
+   "proof_withdrawal": {
+    "hash": "0x634c8a35f8befc9670130af3ef3473ee2528b0e7567a90a1e11389effcd8e947",
+    "amount": "13,611.50 USDT",
+    "date": "2026-03-19 08:05 UTC",
+    "usd": "13,601.86"
+   },
+   "tier": "neutral",
+   "tier_label": "Neutral",
+   "summary": "First room I played seriously. No KYC, no money problems, but almost no sports, VIP 5/10, laggy.",
+   "wagered_label": "Gold level"
+  },
+  {
+   "slug": "gamdom",
+   "name": "Gamdom",
+   "ref": "https://gamdom.com/r/staspanda",
+   "ref_code": "staspanda",
+   "ref_note": "could not change to degenreceipts (01.11)",
+   "verdict": "neutral — sports tab disabled for the account",
+   "rank": 7,
+   "status": "page-v1",
+   "wagered_usd": 93612,
+   "vip": "Silver 3",
+   "joined": "2026-07",
+   "deposits_usd": 24044.08,
+   "withdrawals_usd": 13798.0,
+   "proof_deposit": {
+    "hash": "0xf4398eae338d084b8cdfd407408cca07548ff2f50f4f7f42fb404040c8aa31c5",
+    "amount": "11,809.35 USDC",
+    "date": "2026-07-06 09:17 UTC",
+    "usd": "11,807.14"
+   },
+   "proof_withdrawal": {
+    "hash": "0xaebd859533d24225c19af25befcbd3a6d1be2917fd2964e22aafe299dec9e66e",
+    "amount": "12,450.35 USDC",
+    "date": "2026-07-07 16:31 UTC",
+    "usd": "12,448.02"
+   },
+   "tier": "neutral",
+   "tier_label": "Neutral",
+   "summary": "Fine casino, good quests. KYC level 3 on a small withdrawal, same document rejected ~10 times. Then the Sports tab was switched off for my account.",
+   "wagered_label": "$94K wagered",
+   "net_usd": -10239
+  },
+  {
+   "slug": "rollbit",
+   "name": "Rollbit",
+   "ref": "https://rollbit.com/referral/degenreceipts",
+   "ref_code": "degenreceipts",
+   "verdict": "neutral",
+   "rank": 8,
+   "status": "page-v1",
+   "wagered_usd": null,
+   "vip": "Silver 1",
+   "note": "Panda's country restricted; doesn't play without full KYC possible; no tx proof",
+   "tier": "neutral",
+   "tier_label": "Neutral",
+   "summary": "Solid old book with real sports limits — but my country is restricted and I don't play where I can't pass full KYC.",
+   "wagered_label": "Limited"
+  },
+  {
+   "slug": "rolly",
+   "name": "Rolly",
+   "ref": "https://rolly.io/?r=DEGENRECEIPTS",
+   "ref_code": "DEGENRECEIPTS",
+   "verdict": "neutral",
+   "rank": 9,
+   "status": "page-v1",
+   "wagered_usd": null,
+   "vip": "Newbie (31/2K points)",
+   "note": "sports under maintenance; waiting",
+   "tier": "neutral",
+   "tier_label": "Neutral",
+   "summary": "New, eager, transparent rakeback ladder and published reserves. No sportsbook yet — waiting.",
+   "wagered_label": "Limited"
+  },
+  {
+   "slug": "solcasino",
+   "name": "SolCasino",
+   "ref": null,
+   "ref_code": "degenreceipt",
+   "verdict": "neutral — good room, half-empty",
+   "rank": 10,
+   "status": "page-v2",
+   "note": "no KYC; thin VIP due to low traffic; code degenreceipt (no s)",
+   "proof_deposit": {
+    "chain": "solana",
+    "hash": "3RJpXnDGxXj2TB4FAQU8QaaMQ3GvQ4oPjFixFmRgtNJMCtHKWcyLYiJFA6FCgXQgrjfJa5bNAaf17nVvav7f61Qp",
+    "amount": "3,000 USDC",
+    "date": "2026-10-16 08:59 UTC",
+    "usd": "3,000",
+    "to": "Solcasino.io 6qkh2…CJ4U"
+   },
+   "proof_withdrawal": {
+    "chain": "ethereum",
+    "hash": "0x895a1224c2d2789210ecedc137f6107e63893312f8978200bc8f91eb92e268d3",
+    "amount": "4,999.96 USDC",
+    "date": "2026-10-17 19:07 UTC",
+    "usd": "4,998.23",
+    "to": "panda.eth"
+   },
+   "tier": "neutral",
+   "tier_label": "Neutral",
+   "summary": "Good room from the NFT-boom days, now half-empty. No KYC, fair odds, $5K in / $7K out in October without issues.",
+   "wagered_label": "Limited"
+  },
+  {
+   "slug": "winna",
+   "name": "Winna",
+   "ref": null,
+   "ref_code": null,
+   "verdict": "very negative — avoid",
+   "rank": 11,
+   "status": "page-v1",
+   "wagered_usd": 5863428,
+   "note": "No referral link on purpose. Account closed Jul 17 2026 after 3 weeks; BTC withdrawal $15,658 cancelled, settled $3,800 win voided; player was net −$32,728 on the site (their ledger)",
+   "proof_deposit": {
+    "hash": "0xc147b1cf4675ac0ef87ee533ae3ce46f0f15cb1443f86a85b782d76cae8e7456",
+    "amount": "50,000 USDC",
+    "date": "2026-07-05 11:33 UTC",
+    "usd": "49,990.65"
+   },
+   "proof_withdrawal": {
+    "hash": "0x66d04e528ec77dc5ca654bf746953e0a77feb9edeec1df3bc37d60e08b761ae9",
+    "amount": "41,892.90 USDC",
+    "date": "2026-07-03 21:00 UTC",
+    "usd": "41,885.07"
+   },
+   "tier": "negative",
+   "tier_label": "Very negative",
+   "summary": "Recruited me as a VIP, then banned me 3 weeks later, cancelled a $15.7K withdrawal and kept ~$25–30K — while I was net −$32.7K on their own ledger. No referral link.",
+   "wagered_label": "$5.86M wagered",
+   "deposits_usd": 104615.53,
+   "withdrawals_usd": 71887.27,
+   "net_usd": -32728.26,
+   "joined": "2026-06"
+  },
+  {
+   "slug": "1win",
+   "name": "1win",
+   "ref": null,
+   "ref_code": null,
+   "verdict": "not played yet",
+   "rank": null,
+   "status": "not-started",
+   "note": "VIP manager courting in DMs, no concrete offer yet; sports limits promised",
+   "tier": "none",
+   "tier_label": "Not started",
+   "summary": "VIP manager courting me in DMs; no concrete offer yet. Page opens when I actually play.",
+   "wagered_label": "Not played"
+  }
+ ]
+}

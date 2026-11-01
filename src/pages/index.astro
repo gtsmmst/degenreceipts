@@ -1,0 +1,182 @@
+---
+import Base from '../layouts/Base.astro';
+import Receipt from '../components/Receipt.astro';
+import site from '../data/site.json';
+import { casinos, usd, txUrl, txSite, shortDate } from '../lib/casinos';
+
+const ranked = casinos.filter((c) => c.rank != null);
+const unranked = casinos.filter((c) => c.rank == null);
+const flows = casinos.filter((c) => c.deposits_usd != null && c.withdrawals_usd != null);
+const stake = casinos.find((c) => c.slug === 'stake')!;
+const totalWagered = casinos.reduce((s, c) => s + (c.wagered_usd ?? 0), 0);
+const updated = 'Nov 2, 2026';
+---
+<Base title={site.name}>
+  <section class="hero">
+    <div class="hero-text">
+      <p class="eyebrow">A gambler's diary · by Panda</p>
+      <h1>$20M+ wagered. Every deposit and withdrawal on the record.</h1>
+      <p class="lead">I play with my own money and publish what happened: deposits, withdrawals, VIP stats, screenshots, on-chain transactions. No fake balances, no sponsorships, no paid placements. Casinos are ranked by my own experience with them.</p>
+      <p class="hero-stats mono">12 casinos · {usd(totalWagered, { compact: true })} wagered in screenshots · wallet {site.wallet}</p>
+    </div>
+    <Receipt
+      subtitle="RECEIPT #0001"
+      rows={[
+        { k: 'CASINO', v: 'STAKE.COM' },
+        { k: 'TYPE', v: 'WITHDRAWAL' },
+        { k: 'NETWORK', v: 'ETHEREUM' },
+        { k: 'REQUESTED', v: 'SEP 20, 00:43' },
+        { k: 'CONFIRMED', v: 'SEP 20, 00:44' },
+      ]}
+      totalLabel="AMOUNT"
+      totalValue="125,000 USDC"
+      stamp="PAID"
+      links={[{ label: 'VIEW ON ETHERSCAN', href: txUrl(stake.proof_withdrawal!) }]}
+    />
+  </section>
+
+  <section id="ranking" class="panel ranking-panel">
+    <div class="sec-head">
+      <div>
+        <h2>Ranking</h2>
+        <p class="muted">Ranked by my own experience. Casino names are my referral links; reviews open the full story and receipts.</p>
+      </div>
+      <div class="legend mono">
+        <span class="pill tier-great"><span class="dot"></span>Great</span>
+        <span class="pill tier-good"><span class="dot"></span>Good</span>
+        <span class="pill tier-neutral"><span class="dot"></span>Neutral</span>
+        <span class="pill tier-negative"><span class="dot"></span>Negative</span>
+      </div>
+    </div>
+
+    <div class="table-scroll ranking-table">
+      <table class="ranking">
+        <thead>
+          <tr><th style="width:52px">#</th><th>Casino</th><th>My experience</th><th>Review</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          {[...ranked, ...unranked].map((c) => (
+            <tr>
+              <td class="num">{c.rank ?? '—'}</td>
+              <td>
+                {c.ref
+                  ? <a class="cas" href={c.ref} rel="sponsored noopener" target="_blank">{c.name} <span class="muted" style="font-weight:400;font-size:13px">↗</span></a>
+                  : <span class="cas" style="font-weight:700;font-size:16px">{c.name}</span>}
+                <br /><span class="wag">{c.wagered_label}</span>
+              </td>
+              <td><span class={`pill tier-${c.tier}`}><span class="dot"></span>{c.tier_label}</span></td>
+              <td>{c.status === 'not-started'
+                ? <span class="muted">Soon</span>
+                : <a class="btn btn-sm" href={`/casinos/${c.slug}/`}>Review →</a>}</td>
+              <td class="notes">{c.summary}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="rank-cards">
+      {[...ranked, ...unranked].map((c) => (
+        <div class="rank-card">
+          <div class="top">
+            <div>
+              <span class="mono muted">{c.rank ?? '—'}&nbsp;&nbsp;</span>
+              {c.ref ? <a class="cas" href={c.ref} rel="sponsored noopener" target="_blank">{c.name} ↗</a> : <span class="cas">{c.name}</span>}
+              <div class="wag">{c.wagered_label}</div>
+            </div>
+            <span class={`pill tier-${c.tier}`}><span class="dot"></span>{c.tier_label}</span>
+          </div>
+          <p class="notes">{c.summary}</p>
+          <div class="row">
+            {c.status === 'not-started' ? <span class="muted">Review: soon</span> : <a class="btn btn-sm" href={`/casinos/${c.slug}/`}>Read the review →</a>}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="log" class="log">
+    <div class="sec-head">
+      <div>
+        <h2>Withdrawal log</h2>
+        <p class="muted">Money in, money out, per casino — from account exports and screenshots. The biggest transactions link straight to the blockchain: my wallet is public, check it yourself.</p>
+      </div>
+      <span class="mono muted" style="font-size:13px">UPDATED {updated.toUpperCase()}</span>
+    </div>
+    <div class="table-scroll">
+      <table class="ranking flows">
+        <thead>
+          <tr><th>Casino</th><th>Deposited</th><th>Withdrawn</th><th>Net for me</th><th>On-chain proof</th></tr>
+        </thead>
+        <tbody>
+          {flows.map((c) => (
+            <tr>
+              <td><a class="cas" href={`/casinos/${c.slug}/`}>{c.name}</a><br /><span class="wag">{c.deposits_n ? `${c.deposits_n} deposits · ${c.withdrawals_n} withdrawals` : c.joined ? `since ${shortDate(c.joined).toLowerCase()}` : ''}</span></td>
+              <td class="mono">{usd(c.deposits_usd)}</td>
+              <td class="mono">{usd(c.withdrawals_usd)}</td>
+              <td class="mono" style={`color:${(c.net_usd ?? 0) >= 0 ? 'var(--great)' : 'var(--negative)'}`}>{usd(c.net_usd, { sign: true })}</td>
+              <td class="proofs">
+                {c.proof_deposit && <a class="btn btn-sm" href={txUrl(c.proof_deposit)} rel="noopener" target="_blank">dep {c.proof_deposit.amount} ↗</a>}
+                {c.proof_withdrawal && <a class="btn btn-sm" href={txUrl(c.proof_withdrawal)} rel="noopener" target="_blank">wd {c.proof_withdrawal.amount} ↗</a>}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <div class="log-foot">
+      <span class="muted">Net = withdrawn minus deposited, stablecoins only. Winna's row is their own ledger before they closed the account. Yeet, MetaWin, Rollbit, Rolly, SolCasino, BC.Game: numbers and receipts on each review page.</span>
+      <a class="btn" href="/casinos/stake/#receipts">Full Stake log →</a>
+    </div>
+  </section>
+
+  <section id="leaderboard" class="panel leaderboard">
+    <div>
+      <h2>Leaderboard</h2>
+      <p class="soft" style="margin-top:10px;line-height:1.6">No referrals yet — nowhere, honestly. Once 10 active players sign up through my links, I'll start a leaderboard with real prizes. Until then, every month I'll post my referral stats from each casino here, so you can see exactly what this site earns.</p>
+    </div>
+    <div class="counter mono">
+      <div class="muted">ACTIVE REFERRALS</div>
+      <div class="big">0 <span>/ 10</span></div>
+      <div class="muted">leaderboard unlocks at 10</div>
+    </div>
+  </section>
+
+  <section id="how" class="how">
+    <p class="eyebrow">How I review</p>
+    <h2 style="font-size:30px;margin:8px 0 22px">Three rules</h2>
+    <div class="rules">
+      <div class="panel"><div class="mono" style="color:var(--blue);font-size:13px">01</div><h3>My money, my accounts</h3><p class="soft">Every casino here is one I've played with real deposits.</p></div>
+      <div class="panel"><div class="mono" style="color:var(--blue);font-size:13px">02</div><h3>Receipts on every page</h3><p class="soft">Deposit and withdrawal screenshots, VIP stats, on-chain proof.</p></div>
+      <div class="panel"><div class="mono" style="color:var(--blue);font-size:13px">03</div><h3>Bad news stays in</h3><p class="soft">If something goes wrong — a delay, a KYC surprise, a ban — I say so. Everything stays transparent.</p></div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero { display: grid; gap: 36px; padding: 44px 0 40px; }
+  @media (min-width: 900px) { .hero { grid-template-columns: minmax(0, 1fr) 380px; gap: 56px; align-items: center; padding: 56px 0 48px; } }
+  .hero h1 { font-size: clamp(34px, 5vw, 58px); line-height: 1.05; letter-spacing: -0.025em; margin-top: 14px; }
+  .lead { margin-top: 18px; max-width: 600px; font-size: 18px; line-height: 1.6; color: var(--soft); }
+  .hero-stats { margin-top: 18px; font-size: 13px; color: var(--muted); }
+  .sec-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 16px; margin-bottom: 16px; }
+  .sec-head h2 { font-size: 24px; }
+  .sec-head p { margin-top: 6px; font-size: 15px; max-width: 720px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 6px; }
+  .legend .pill { font-size: 12px; padding: 3px 10px 3px 7px; }
+  .ranking-panel { margin-bottom: 28px; }
+  .log { margin-bottom: 28px; }
+  .flows td.proofs { display: flex; flex-wrap: wrap; gap: 6px; }
+  .flows .cas { font-size: 15px; }
+  .log-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 4px 0; font-size: 14px; }
+  .leaderboard { display: grid; gap: 20px; margin-bottom: 40px; }
+  @media (min-width: 800px) { .leaderboard { grid-template-columns: minmax(0, 1fr) 260px; align-items: center; } }
+  .leaderboard h2 { font-size: 24px; }
+  .counter { border: 1px dashed var(--border-2); border-radius: 10px; padding: 16px; font-size: 13px; }
+  .counter .big { font-size: 36px; font-weight: 700; color: var(--text); margin: 6px 0; }
+  .counter .big span { font-size: 16px; color: var(--muted); font-weight: 400; }
+  .how { margin-bottom: 48px; }
+  .rules { display: grid; gap: 14px; }
+  @media (min-width: 800px) { .rules { grid-template-columns: repeat(3, 1fr); } }
+  .rules h3 { font-size: 19px; margin: 10px 0 8px; }
+</style>

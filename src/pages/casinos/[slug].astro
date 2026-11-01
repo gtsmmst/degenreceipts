@@ -1,0 +1,140 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Receipt from '../../components/Receipt.astro';
+import { casinos, bySlug, usd, txUrl, txSite, shortDate } from '../../lib/casinos';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('casinos');
+  return entries.map((entry) => ({ params: { slug: entry.data.slug }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+const fm = entry.data;
+const c = bySlug[fm.slug];
+const ranked = casinos.filter((x) => x.rank != null);
+const idx = ranked.findIndex((x) => x.slug === fm.slug);
+const prev = idx > 0 ? ranked[idx - 1] : null;
+const next = idx >= 0 && idx < ranked.length - 1 ? ranked[idx + 1] : null;
+
+const ref = fm.referral && fm.referral !== 'none' ? fm.referral : c?.ref ?? null;
+const refCode = fm.referral_code ?? c?.ref_code ?? null;
+const notStarted = c?.status === 'not-started';
+const description = `${fm.casino}: ${fm.verdict ?? ''}. ${c?.summary ?? ''}`.slice(0, 300);
+const firstShot = entry.body?.match(/\]\((\/proof\/[^)]+\.png)\)/)?.[1];
+
+const hasMoney = c?.deposits_usd != null && c?.withdrawals_usd != null;
+const net = c?.net_usd ?? null;
+const stamp = c?.tier === 'negative' ? 'SEIZED' : net == null ? (c?.tier === 'none' ? 'PENDING' : 'ON RECORD') : Math.abs(net) < 1000 ? 'BREAK-EVEN' : net > 0 ? 'PAID' : 'LOST';
+const stampTone = c?.tier === 'negative' ? 'neg' : net != null && net > 1000 ? 'pos' : 'blue';
+const rows: { k: string; v: string }[] = [];
+if (c?.joined) rows.push({ k: 'SINCE', v: shortDate(c.joined) });
+if (c?.wagered_usd) rows.push({ k: 'WAGERED', v: usd(c.wagered_usd) });
+if (c?.deposits_usd != null) rows.push({ k: 'DEPOSITED', v: usd(c.deposits_usd) + (c.deposits_n ? ` (${c.deposits_n})` : '') });
+if (c?.withdrawals_usd != null) rows.push({ k: 'WITHDRAWN', v: usd(c.withdrawals_usd) + (c.withdrawals_n ? ` (${c.withdrawals_n})` : '') });
+if (c?.vip) rows.push({ k: 'VIP', v: c.vip.toUpperCase() });
+if (fm.kyc) rows.push({ k: 'KYC', v: fm.kyc.split(/[;,.]/)[0].toUpperCase().slice(0, 26) });
+const links = [];
+if (c?.proof_deposit) links.push({ label: `DEPOSIT ${c.proof_deposit.amount}`, href: txUrl(c.proof_deposit) });
+if (c?.proof_withdrawal) links.push({ label: `WITHDRAWAL ${c.proof_withdrawal.amount}`, href: txUrl(c.proof_withdrawal) });
+
+const facts: { k: string; v: string }[] = [];
+if (fm.played_since) facts.push({ k: 'Playing since', v: fm.played_since });
+if (c?.wagered_usd) facts.push({ k: 'Wagered', v: usd(c.wagered_usd) });
+if (hasMoney) facts.push({ k: 'In / out', v: `${usd(c!.deposits_usd, { compact: true })} / ${usd(c!.withdrawals_usd, { compact: true })}` });
+if (net != null) facts.push({ k: 'Net for me', v: usd(net, { sign: true }) });
+if (fm.vip_level) facts.push({ k: 'VIP', v: fm.vip_level });
+if (fm.kyc) facts.push({ k: 'KYC', v: fm.kyc });
+if (fm.speed) facts.push({ k: 'Speed', v: fm.speed });
+if (fm.problems) facts.push({ k: 'Problems', v: fm.problems });
+
+const sportsCut = ['yeet', 'thrill', 'gamdom'];
+const sportsOk = ['stake', 'shuffle'];
+const toc = headings.filter((h) => h.depth === 2);
+---
+<Base title={fm.casino} description={description} ogImage={firstShot}>
+  <nav class="crumbs mono" aria-label="Breadcrumb"><a href="/#ranking">Ranking</a><span>/</span><span class="cur">{fm.casino}</span></nav>
+
+  <section class="review-head">
+    <div>
+      <div class="meta">
+        <span class={`pill tier-${c?.tier ?? 'none'}`}><span class="dot"></span>{c?.tier_label ?? fm.verdict}</span>
+        {c?.rank && <span class="mono muted">#{c.rank} IN MY RANKING</span>}
+        {fm.byline && <span class="mono muted">· {fm.byline.replace(/^Updated /, 'UPDATED ').replace(' · by Panda', ' · BY PANDA').toUpperCase()}</span>}
+      </div>
+      <h1>{fm.title}</h1>
+      {fm.verdict && <p class="verdict-line">Verdict: <strong>{fm.verdict}</strong>{fm.limited_experience && <span class="muted"> · limited experience</span>}</p>}
+      <div class="cta">
+        {ref
+          ? <a class="btn btn-primary" href={ref} rel="sponsored noopener" target="_blank">Play at {fm.casino} ↗</a>
+          : c?.tier === 'negative'
+            ? <span class="btn no-ref">No referral link — I don't want anyone signing up there through me</span>
+            : null}
+        {!notStarted && <a class="btn" href="#receipts">Jump to receipts</a>}
+        {ref && refCode && <span class="muted ref-note">Referral link · code <span class="mono" style="color:var(--text)">{refCode}</span></span>}
+      </div>
+    </div>
+    {rows.length > 0 && (
+      <Receipt
+        subtitle={`${fm.casino.toUpperCase()} · ACCOUNT SUMMARY`}
+        rows={rows}
+        totalLabel="NET"
+        totalValue={net != null ? usd(net, { sign: true }) : '—'}
+        stamp={stamp}
+        stampTone={stampTone}
+        links={links}
+        tilt={-1.2}
+      />
+    )}
+  </section>
+
+  <div class="review-body">
+    <article class="prose">
+      <Content />
+    </article>
+
+    <aside class="sidebar">
+      {facts.length > 0 && (
+        <div class="panel side">
+          <div class="eyebrow" style="margin-bottom:10px">At a glance</div>
+          {facts.map((f) => <div class="kv"><span>{f.k}</span><span>{f.v}</span></div>)}
+        </div>
+      )}
+      {toc.length > 1 && (
+        <div class="panel side">
+          <div class="eyebrow" style="margin-bottom:8px">On this page</div>
+          {toc.map((h) => <a class="toc" href={`#${h.slug}`}>{h.text}</a>)}
+        </div>
+      )}
+      <div class="panel side">
+        <div class="eyebrow" style="margin-bottom:8px">Same story, other rooms</div>
+        <p class="soft" style="font-size:14px;margin-bottom:8px">Sports limits cut after a good run:</p>
+        {sportsCut.filter((s) => s !== fm.slug).map((s) => <a class="toc" href={`/casinos/${s}/`}>{bySlug[s].name} →</a>)}
+        <p class="soft" style="font-size:14px;margin-top:10px">Still taking my sports action: {sportsOk.filter((s) => s !== fm.slug).map((s, i) => <span>{i > 0 && ', '}<a href={`/casinos/${s}/`}>{bySlug[s].name}</a></span>)}.</p>
+      </div>
+    </aside>
+  </div>
+
+  <nav class="prevnext" aria-label="More reviews">
+    {prev && <a href={`/casinos/${prev.slug}/`}><span class="mono muted" style="font-size:12px">← #{prev.rank}</span><span style="font-weight:600">{prev.name}: {prev.tier_label}</span></a>}
+    {next && <a class="next" href={`/casinos/${next.slug}/`}><span class="mono muted" style="font-size:12px">#{next.rank} →</span><span style="font-weight:600">{next.name}: {next.tier_label}</span></a>}
+  </nav>
+</Base>
+
+<style>
+  .crumbs { padding: 16px 0 0; font-size: 13px; color: var(--muted); }
+  .crumbs a { color: var(--muted); text-decoration: none; }
+  .crumbs span { margin: 0 6px; }
+  .crumbs .cur { color: var(--text); margin: 0; }
+  .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin-bottom: 16px; font-size: 12px; }
+  .review-head h1 { font-size: clamp(30px, 4vw, 48px); line-height: 1.1; letter-spacing: -0.025em; }
+  .verdict-line { margin-top: 16px; font-size: 17px; color: var(--soft); }
+  .verdict-line strong { color: var(--text); }
+  .cta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 22px; }
+  .no-ref { cursor: default; color: var(--soft); font-weight: 500; white-space: normal; }
+  .ref-note { font-size: 13px; }
+  .side { padding: 16px 18px; }
+  .toc { display: block; padding: 6px 0; color: var(--text); text-decoration: none; font-size: 14px; }
+  .toc:hover { color: var(--link); }
+</style>

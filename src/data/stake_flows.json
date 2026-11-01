@@ -1,0 +1,81 @@
+{
+ "casino": "Stake",
+ "source": "Stake transaction export (crypto), downloaded 2026-10-31; aggregated, no hashes or addresses",
+ "period": [
+  "2023-10-22",
+  "2026-10-18"
+ ],
+ "stablecoins": {
+  "deposited": 1988583.06,
+  "withdrawn": 2235611.46,
+  "net_withdrawn_minus_deposited": 247028.41,
+  "n_deposits": 63,
+  "n_withdrawals": 51,
+  "biggest_deposit": 81737.16,
+  "biggest_withdrawal": 125000.0,
+  "withdrawals_100k_plus": 5,
+  "deposits_50k_plus": 17
+ },
+ "other_coins": {
+  "eth": {
+   "deposited": 3.55,
+   "withdrawn": 0.88976545
+  },
+  "btc": {
+   "deposited": 0.0,
+   "withdrawn": 0.00522103
+  }
+ },
+ "monthly_stablecoins": [
+  {
+   "month": "2026-04",
+   "deposited": 14774,
+   "withdrawn": 4809,
+   "n_dep": 5,
+   "n_wd": 1
+  },
+  {
+   "month": "2026-05",
+   "deposited": 15205,
+   "withdrawn": 18000,
+   "n_dep": 8,
+   "n_wd": 1
+  },
+  {
+   "month": "2026-06",
+   "deposited": 565177,
+   "withdrawn": 277623,
+   "n_dep": 18,
+   "n_wd": 7
+  },
+  {
+   "month": "2026-07",
+   "deposited": 205172,
+   "withdrawn": 322395,
+   "n_dep": 5,
+   "n_wd": 5
+  },
+  {
+   "month": "2026-08",
+   "deposited": 801751,
+   "withdrawn": 924435,
+   "n_dep": 18,
+   "n_wd": 18
+  },
+  {
+   "month": "2026-09",
+   "deposited": 386503,
+   "withdrawn": 296944,
+   "n_dep": 9,
+   "n_wd": 13
+  },
+  {
+   "month": "2026-10",
+   "deposited": 0,
+   "withdrawn": 391406,
+   "n_dep": 0,
+   "n_wd": 6
+  }
+ ],
+ "note": "Monthly rows are cash flows, not month-end P&L: a deposit can sit in the balance until the next month. Only the all-time net is a result (balance now ~0)."
+}
