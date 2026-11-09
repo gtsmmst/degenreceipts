@@ -25,7 +25,7 @@ byline: "Updated Nov 1, 2026 · by Panda"
 |---|---|
 | Played | June–July 2026 |
 | Wagered | $5.86M |
-| Deposited / withdrawn | $104,615 in, $71,887 out at the time of the ban (their figures) |
+| Deposited / withdrawn | $104,615 in (their own ledger, July); $98,116 paid out in total |
 | Withdrawals | Up to $41,893 paid; the last BTC withdrawal of $15,659 cancelled |
 | Kept by Winna | ~$25–30K: the $15,658 withdrawal, a settled $3,800 win, and the remaining balance (roughly $6–9K) |
 | KYC | Full, from the start |
@@ -47,10 +47,10 @@ Mostly sports. Near a level-up, I topped off the remaining wager with dice at 1.
 A settled sports bet — $2,500 in BTC that won $3,800 — was voided as well, and whatever was still on the balance (roughly $6–9K) went with it. All in, Winna kept somewhere between $25K and $30K; I don't have the exact figure because I lost access to the account. The BTC part alone was about $20K, which is what I wrote on X on Jul 27, a week after the ban.
 
 ## The numbers
-Their own VIP manager showed me the ledger two days before the ban: **$104,615 deposited, $71,887 withdrawn, net $32,728 to the house.** Total bonuses I had received were around $11,500. Even counting everything they seized, I was a net loser on Winna. They didn't ban a winner; they banned a losing high-roller and kept his balance.
+Before the ban their own VIP manager sent me my ledger: **$104,615 deposited, $71,887 withdrawn** at that point. After that I withdrew another $20,000, and $6,229 was released once the account was closed. So: at least **$104.6K in, $98.1K out**. I left Winna down in cash — and the balance that was still on the account when they closed it was never paid. Total bonuses I had received were around $11,500. They didn't stop a winner from cashing out; they closed an account with money on it and kept the money.
 
 ## My take
-Every crypto casino has a clause about low-multiplier wagering. What matters is how it's used. Here it was used three days after the VIP host was handing out bonuses, against a player who was down $32K, to confiscate funds that mostly came from his own deposits and a settled bet they admit was fine. Nobody explained what was "abused" — the "farm" they describe lost me money.
+Every crypto casino has a clause about low-multiplier wagering. What matters is how it's used. Here it was used three days after the VIP host was handing out bonuses, against a player who was down in cash on the site, to confiscate a balance that included a settled bet they admit was fine. Nobody explained what was "abused" — the "farm" they describe lost me money.
 
 Deposits were instant; withdrawals could hang for days in "internal review" despite full KYC. The games and odds were fine. None of that matters when the operator can rewrite the deal whenever it suits them.
 
@@ -71,5 +71,5 @@ Screenshots from the VIP Telegram chat and my account. My handle and name are hi
 ![Jul 14: host confirms the reload bonus is ready; Jul 17: account closed after "a review"](/proof/winna/winna_chat_1_ban.png)
 ![Jul 18–19: withdrawals in "random check"; casino lobby returns 403](/proof/winna/winna_chat_2_review.png)
 ![Jul 20: the verdict — $15,658 BTC withdrawal cancelled, $6,229 approved, "your sports action was fine"](/proof/winna/winna_chat_3_verdict.png)
-![VIP manager's ledger before the ban: $104,615 deposited, $71,887 withdrawn, net $32,728](/proof/winna/winna_chat_4_ledger.png)
+![VIP manager's ledger before the ban: $104,615 deposited, $71,887 withdrawn at that point](/proof/winna/winna_chat_4_ledger.png)
 ![Account: $5,863,428 wagered](/proof/winna/winna_wager.png)

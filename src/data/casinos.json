@@ -272,7 +272,7 @@
    "rank": 11,
    "status": "page-v1",
    "wagered_usd": 5863428,
-   "note": "No referral link on purpose. Account closed Jul 17 2026 after 3 weeks; BTC withdrawal $15,658 cancelled, settled $3,800 win voided; player was net −$32,728 on the site (their ledger)",
+   "note": "No referral link on purpose. Account closed Jul 17 2026 after 3 weeks with a balance on it; BTC withdrawal $15,658 cancelled, settled $3,800 win voided. $104.6K deposited (their ledger), $98.1K paid out in total (incl. $6,229 released after the ban); the rest of the balance was kept",
    "proof_deposit": {
     "hash": "0xc147b1cf4675ac0ef87ee533ae3ce46f0f15cb1443f86a85b782d76cae8e7456",
     "amount": "50,000 USDC",
@@ -287,11 +287,11 @@
    },
    "tier": "negative",
    "tier_label": "Very negative",
-   "summary": "Recruited me as a VIP, then banned me 3 weeks later, cancelled a $15.7K withdrawal and kept ~$25–30K — while I was net −$32.7K on their own ledger. No referral link.",
+   "summary": "Recruited me as a VIP, then closed my account 3 weeks later with a balance on it: cancelled a $15.7K withdrawal and kept ~$25–30K. No referral link.",
    "wagered_label": "$5.86M wagered",
    "deposits_usd": 104615.53,
-   "withdrawals_usd": 71887.27,
-   "net_usd": -32728.26,
+   "withdrawals_usd": 98115.91,
+   "net_usd": -6499.62,
    "joined": "2026-06"
   },
   {
