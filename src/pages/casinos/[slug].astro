@@ -52,8 +52,22 @@ if (fm.problems) facts.push({ k: 'Problems', v: fm.problems });
 const sportsCut = ['yeet', 'thrill', 'gamdom'];
 const sportsOk = ['stake', 'shuffle'];
 const toc = headings.filter((h) => h.depth === 2);
+const seoHooks: Record<string, string> = {
+  stake: '51 withdrawals, $125K in 1 minute',
+  winna: 'account closed with a balance',
+  shuffle: 'KYC level 4 in the middle of a withdrawal',
+  yeet: 'fast payouts, sports limits cut',
+  thrill: 'fast USDC both ways, sports limits cut',
+  gamdom: 'sportsbook switched off for my account',
+  bcgame: 'fast both ways, sports not cut yet',
+  metawin: 'instant wallet payouts, no KYC',
+  rollbit: 'solid book, my country restricted',
+  solcasino: 'no KYC, fast, half-empty',
+  rolly: 'no KYC so far, no sportsbook yet',
+};
+const pageTitle = seoHooks[fm.slug] ? `${fm.casino} review: ${seoHooks[fm.slug]}` : fm.casino;
 ---
-<Base title={fm.casino} description={description} ogImage={firstShot}>
+<Base title={pageTitle} description={description} ogImage={firstShot}>
   <nav class="crumbs mono" aria-label="Breadcrumb"><a href="/#ranking">Ranking</a><span>/</span><span class="cur">{fm.casino}</span></nav>
 
   <section class="review-head">
